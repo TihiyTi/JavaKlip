@@ -1,4 +1,4 @@
-rootProject.name = "GradleTest"
+rootProject.name = "my-project"
 
 pluginManagement{
     repositories{
@@ -12,7 +12,7 @@ dependencyResolutionManagement{
     repositories{
         mavenCentral()
     }
-//    includeBuild("../my-other-project")
+    includeBuild("../my-lib-project")
 }
 
 include("app")

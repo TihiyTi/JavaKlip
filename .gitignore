@@ -1,0 +1,12 @@
+
+.gradle/
+
+.idea/
+
+my-project/gradlew
+
+my-project/gradle/
+
+gradle/
+
+my-project/gradlew.bat
