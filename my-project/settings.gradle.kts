@@ -13,7 +13,9 @@ dependencyResolutionManagement{
         mavenCentral()
     }
     includeBuild("../my-lib-project")
+//    includeBuild("../my-build-logic")
 }
 
 include("app")
 include("data-model")
+include("business-logic")

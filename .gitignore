@@ -10,3 +10,9 @@ my-project/gradle/
 gradle/
 
 my-project/gradlew.bat
+
+my-project/business-logic/build/
+
+my-project/data-model/build/
+
+my-project/app/build/

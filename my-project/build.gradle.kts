@@ -1,0 +1,1 @@
+val globalBuildGroup = "My global build"
