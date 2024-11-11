@@ -1,15 +1,17 @@
-plugins{
-    id("java-library") // Gradle Core plugin
+plugins {
+    id("my-java-library")
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(22))
-}
+dependencies {
+//    implementation("org.gradlex:java-module-dependencies:1.4.2")
 
-tasks.test{
-    useJUnitPlatform()
-}
+    implementation(libs.commons.lang3)
+//    implementation(libs.slf4j.api)
+    implementation("org.example:shared-utils")
 
-dependencies{
-    implementation("org.apache.commons:commons-lang3:3.9")
+    api("org.example:data-model")
+
+//    api("org.example.my-app:data-model") //alternative: project(":data-model")
+
+//    compileOnlyApi("com.google.errorprone:error_prone_annotations")
 }

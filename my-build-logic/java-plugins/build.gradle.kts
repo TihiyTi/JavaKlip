@@ -1,7 +1,7 @@
-plugins{
-//    `kotlin-dsl` // Unsupported in JAVA 22 =(
+plugins {
+    `kotlin-dsl`
 }
 
-dependencies{
-//    implementation("")
+dependencies {
+    implementation("org.gradlex:java-module-dependencies:1.4.2")
 }

@@ -1,21 +1,24 @@
-rootProject.name = "my-project"
-
 pluginManagement{
-    repositories{
-        gradlePluginPortal()
-        google()
-    }
-//    includeBuild("../my-build-logic")
+    repositories.gradlePluginPortal()
+    includeBuild("../my-build-logic")
 }
+
 
 dependencyResolutionManagement{
-    repositories{
-        mavenCentral()
-    }
-    includeBuild("../my-lib-project")
-//    includeBuild("../my-build-logic")
+    repositories.mavenCentral()
+    includeBuild("../my-other-project")
+    includeBuild(".")
+//    versionCatalogs {
+//        create("libs") {
+//            from(files("gradle/libs.versions.toml"))
+//        }
+//    }
 }
 
+rootProject.name = "my-project"
+
 include("app")
-include("data-model")
 include("business-logic")
+include("data-model")
+
+//enableFeaturePreview("VERSION_CATALOGS")

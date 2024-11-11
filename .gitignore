@@ -16,3 +16,7 @@ my-project/business-logic/build/
 my-project/data-model/build/
 
 my-project/app/build/
+
+my-build-logic/java-plugins/build/
+
+my-other-project/shared-utils/build/

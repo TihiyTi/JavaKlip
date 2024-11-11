@@ -1,35 +1,22 @@
-plugins{
-    id("application") // Gradle Core plugin
-    id("checkstyle")
-//    id("org.jetbrains.kotlin.jvm") version "1.5.21" // Community plugin
-//    id("my_java_library") // Locally defined plugin
+plugins {
+    id("my-java-application")
+
+    id("org.javamodularity.moduleplugin") version "1.8.15"
+//    alias(libs.plugins.javamodularity.moduleplugin)
+//    alias(libs.plugins.javafxplugin)
+//    alias(libs.plugins.springframework.boot)
+//    alias(libs.plugins.spring.dependency.management)
+
 }
 
-val myBuildGroup = "my project build"
-tasks.named<TaskReportTask>("tasks"){
-    displayGroup = myBuildGroup
-}
-tasks.build {
-    group = myBuildGroup
-}
-tasks.check {
-    group = myBuildGroup
-}
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(22))
-}
-
-tasks.test{
-    useJUnitPlatform()
+myApp {
+    mainClass.set("myproject.MyApplication")
 }
 
 dependencies{
-    implementation(project(":business-logic"))
-    implementation(project(":data-model"))
-    implementation("org.apache.commons:commons-lang3:3.9")
-}
+//    implementation("org.gradlex:java-module-dependencies:1.4.2")
 
-application {
-    mainClass.set("MyApplication")
+    implementation("org.example:business-logic")
+//    implementation(project(":business-logic"))
 }
