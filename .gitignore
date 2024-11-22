@@ -20,3 +20,5 @@ my-project/app/build/
 my-build-logic/java-plugins/build/
 
 my-other-project/shared-utils/build/
+
+spring-test/build/

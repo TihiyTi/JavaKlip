@@ -1,0 +1,15 @@
+[versions]
+#javafxplugin = '0.1.0'
+spring-boot = "3.4.0"
+
+[plugins]
+#javafxplugin = { id = 'org.openjfx.javafxplugin', version.ref = 'javafxplugin' }
+
+
+#
+[libraries]
+#spring-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
+#spring-core = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
+
+#javafx-base = { module = 'org.openjfx:javafx-base', version.ref = 'javafx' }
+#javafx-graphics = { module = 'org.openjfx:javafx-graphics', version.ref = 'javafx' }
