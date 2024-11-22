@@ -7,6 +7,7 @@ pluginManagement{
 dependencyResolutionManagement{
     repositories.mavenCentral()
     includeBuild("../my-other-project")
+//    includeBuild("../spring-test")
     includeBuild(".")
 //    versionCatalogs {
 //        create("libs") {

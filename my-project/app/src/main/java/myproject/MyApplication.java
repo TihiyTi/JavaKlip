@@ -6,6 +6,7 @@ import myproject.services.Service;
 /**
  * The application.
  */
+
 public final class MyApplication {
 
     /**

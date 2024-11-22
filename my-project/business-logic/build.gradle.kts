@@ -6,8 +6,9 @@ dependencies {
 //    implementation("org.gradlex:java-module-dependencies:1.4.2")
 
     implementation(libs.commons.lang3)
+
 //    implementation(libs.slf4j.api)
-    implementation("org.example:shared-utils")
+//    implementation("org.example:shared-utils")
 
     api("org.example:data-model")
 
