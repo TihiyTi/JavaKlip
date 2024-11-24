@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.Scene?>
+
+<Scene fx:controller="com.ti.controller.DefaultFxController" xmlns:fx="http://javafx.com/fxml/1" width="800"
+       height="600">
+    <BorderPane>
+        <top>
+            <Label fx:id="title" text="MyTitle"/>
+        </top>
+        <center>
+            <Label text="MyLabel"/>
+        </center>
+    </BorderPane>
+</Scene>

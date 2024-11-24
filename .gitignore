@@ -22,3 +22,19 @@ my-build-logic/java-plugins/build/
 my-other-project/shared-utils/build/
 
 spring-test/build/
+
+fx-test/fx-one/build/
+
+fx-test/fx-one/out/
+
+fx-test/gradlew
+
+fx-test/gradlew.bat
+
+fx-test/fx-two/build/
+
+out/
+
+fx-test/fx-four-signal/build/
+
+fx-test/fx-three/build/
