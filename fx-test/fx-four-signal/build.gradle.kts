@@ -12,12 +12,24 @@ plugins {
 
 group = "com.ti.desktop"
 
+idea {
+    module {
+        inheritOutputDirs = true // Указывает использовать output-путь проекта
+    }
+}
+
+java {
+    modularity.inferModulePath.set(false)
+}
+
 application {
   mainModule.set("com.ti.desktop")
   mainClass.set("com.ti.desktop.FxFourSignal")
 }
 
 dependencies{
+    implementation("com.ti:ti-utils")
+
     implementation("org.openjfx:javafx-base:21.0.6-ea+2")
     implementation("org.openjfx:javafx-graphics:21.0.6-ea+2")
 }

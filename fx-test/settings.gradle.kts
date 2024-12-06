@@ -4,6 +4,9 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories.mavenCentral()
+
+    includeBuild("../ti-java-lib")
+    includeBuild(".")
 }
 
 rootProject.name = "fx-test"

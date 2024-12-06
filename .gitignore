@@ -38,3 +38,9 @@ out/
 fx-test/fx-four-signal/build/
 
 fx-test/fx-three/build/
+
+ti-java-lib/gradlew
+
+ti-java-lib/gradlew.bat
+
+ti-java-lib/ti-utils/build/
