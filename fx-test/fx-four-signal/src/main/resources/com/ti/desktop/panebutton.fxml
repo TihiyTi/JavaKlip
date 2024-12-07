@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: blue; -fx-border-width: 3;">
-    <center>
+    <bottom>
         <StackPane style="-fx-border-color: red; -fx-border-width: 3;">
             <Button text="Нажми меня!" />
         </StackPane>
-    </center>
+    </bottom>
 </BorderPane>
