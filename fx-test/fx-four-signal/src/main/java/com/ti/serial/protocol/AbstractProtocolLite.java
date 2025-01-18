@@ -1,23 +1,19 @@
-package com.ti.serial;
+package com.ti.serial.protocol;
 
-import com.ti.serial.ProtocolCheckable;
-import com.ti.serial.Protocol;
+import com.ti.serial.device.DeviceInterface;
 import com.ti.serial.SerialControllable;
-import com.ti.serial.DeviceInterface;
-import com.ti.serial.CommandSplittableLite;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.stream.Collectors;
 
 public abstract class AbstractProtocolLite<RESPONSE, REQUEST> implements Protocol<RESPONSE, REQUEST> {
 //    private static final Logger LOG = LogManager.getLogger("TiSerialServiceLogger");
 
-    private ProtocolCheckable protocolChecker;
-    private CommandSplittableLite commandSplitter;
+    private final ProtocolCheckable protocolChecker;
+    private final CommandSplittableLite commandSplitter;
 
     protected SerialControllable<RESPONSE, REQUEST> controller;
     private DeviceInterface device;
@@ -38,15 +34,15 @@ public abstract class AbstractProtocolLite<RESPONSE, REQUEST> implements Protoco
         if(protocolChecker.checkProtocol(deque)){
             List<ByteBuffer> frameQueue = commandSplitter.parseQueue(deque);
             if(!frameQueue.isEmpty()){
-                List<REQUEST> listOfRequest = frameQueue.stream().map(this::createByteToRequest).collect(Collectors.toList());
+                List<REQUEST> listOfRequest = frameQueue.stream().map(this::createByteToRequest).toList();
                 listOfRequest.forEach(x->controller.serviceRequest(x));
 
 
 //-----------------TRACE block  -----------------
                 protocolToControllerRequestCounter++;
-                if(protocolToControllerRequestCounter % 10 == 0){
+//                if(protocolToControllerRequestCounter % 10 == 0){
 //                    LOG.trace("protocolToControllerRequestCounter = "+protocolToControllerRequestCounter);
-                }
+//                }
 //-----------------TRACE block  -----------------
             }
         }
@@ -60,7 +56,7 @@ public abstract class AbstractProtocolLite<RESPONSE, REQUEST> implements Protoco
         device.sendDataArray(buffer);
     }
 
-    // TODO: 15.04.2018 вынести в Protocol
+    @Override
     public void sendWithOutProtocol(ByteBuffer buffer){
         device.sendDataArray(buffer);
     }

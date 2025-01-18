@@ -1,4 +1,4 @@
-package com.ti.serial;
+package com.ti.serial.protocol;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
 

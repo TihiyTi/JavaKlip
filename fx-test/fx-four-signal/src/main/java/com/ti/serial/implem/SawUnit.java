@@ -1,21 +1,18 @@
-package com.ti.serial;
+package com.ti.serial.implem;
 
+import com.ti.serial.*;
+import com.ti.serial.protocol.AbstractProtocolLite;
+import com.ti.serial.protocol.CommandSplittableLite;
+import com.ti.serial.protocol.ProtocolCheckable;
 import com.ti.signals.AdvanceSignalBox;
-import com.ti.serial.ProtocolCheckable;
-import com.ti.serial.AbstractCommand;
-import com.ti.serial.Protocol;
-import com.ti.serial.SerialControllable;
-import com.ti.serial.CommandSplittableLite;
-import com.ti.serial.AbstractSawCommand;
-import com.ti.serial.SignalParamGetter;
-import com.ti.serial.AbstractProtocolLite;
+import com.ti.serial.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 import java.util.function.Supplier;
 
 public class SawUnit<COMMAND_TYPE extends AbstractCommand>
         extends AbstractProtocolLite<AbstractCommand, AbstractCommand>
-        implements SerialControllable<AbstractCommand, AbstractCommand>{
+        implements SerialControllable<AbstractCommand, AbstractCommand> {
     private Supplier<COMMAND_TYPE> supplier;
 
     private AdvanceSignalBox box;

@@ -1,6 +1,6 @@
-package com.ti.serial;
+package com.ti.serial.device;
 
-import com.ti.serial.Protocol;
+import com.ti.serial.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 
@@ -10,7 +10,7 @@ public interface DeviceInterface {
     // TODO: 15.04.2018 реализовать во всех device-классах и удалить default определение
     default void sendDataArray(byte[] sendArray){
         System.out.println("Unsupported");
-
     }
+
     <RESPONSE, REQUEST> void setProtocol(Protocol<RESPONSE, REQUEST> protocol);
 }

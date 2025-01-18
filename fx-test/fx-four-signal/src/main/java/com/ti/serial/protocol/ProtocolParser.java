@@ -1,6 +1,4 @@
-package com.ti.serial;
-
-import com.ti.comm.core.checkers.ProtocolCheckable;
+package com.ti.serial.protocol;
 
 public interface ProtocolParser extends ProtocolCheckable, CommandSplittableLite {
 }
