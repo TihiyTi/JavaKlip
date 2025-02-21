@@ -1,6 +1,8 @@
 package com.ti.serial.implem;
 
 import com.ti.serial.*;
+import com.ti.serial.command.AbstractCommand;
+import com.ti.serial.command.AbstractSawCommand;
 import com.ti.serial.protocol.AbstractProtocolLite;
 import com.ti.serial.protocol.CommandSplittableLite;
 import com.ti.serial.protocol.ProtocolCheckable;

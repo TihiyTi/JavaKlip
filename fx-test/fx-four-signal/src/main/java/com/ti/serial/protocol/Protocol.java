@@ -20,13 +20,15 @@ public interface Protocol<RESPONSE, REQUEST> {
         System.out.println("Unsupported method in this protocol");
     }
     default void sendWithOutProtocol(ByteBuffer buffer){System.out.println("Unsupported method in this protocol");}
-//    @Deprecated
-//    default boolean checkProtocol(ConcurrentLinkedDeque<Byte> deque){
-//        System.out.println("Unsupported in new version");
-//        return false;
-//    }
-//    @Deprecated
-//    default void parseQueue(ConcurrentLinkedDeque<Byte> deque){
-//        System.out.println("Unsupported in new version");
-//    }
+
+
+    @Deprecated
+    default boolean checkProtocol(ConcurrentLinkedDeque<Byte> deque){
+        System.out.println("Unsupported in new version");
+        return false;
+    }
+    @Deprecated
+    default void parseQueue(ConcurrentLinkedDeque<Byte> deque){
+        System.out.println("Unsupported in new version");
+    }
 }

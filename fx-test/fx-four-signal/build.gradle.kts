@@ -30,8 +30,16 @@ application {
 dependencies{
     implementation("com.ti:ti-utils")
 
-    implementation("org.openjfx:javafx-base:21.0.6-ea+2")
-    implementation("org.openjfx:javafx-graphics:21.0.6-ea+2")
+    implementation("com.fazecast:jSerialComm:2.11.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+
+    implementation("org.openjfx:javafx-base:21.0.6-ea+2:win")
+    implementation("org.openjfx:javafx-graphics:21.0.6-ea+2:win")
+    implementation("org.openjfx:javafx-fxml:21.0.6-ea+2:win")
+
+   // implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 }
 
 java {
