@@ -61,18 +61,18 @@ public class RemgSignalCommand extends AbstractSawCommand<RemgSignalType> {
         emg11 =  fromByteBufferLittleEndian(buffer, 41);
         emg12 =  fromByteBufferLittleEndian(buffer, 45);
 
-        eit1 =  fromByteBufferLittleEndian(buffer, 49)-9000000;
-        eit2 =  fromByteBufferLittleEndian(buffer, 53)-9000000;
-        eit3 =  fromByteBufferLittleEndian(buffer, 57)-9000000;
-        eit4 =  fromByteBufferLittleEndian(buffer, 61)-9000000;
-        eit5 =  fromByteBufferLittleEndian(buffer, 65)-9000000;
-        eit6 =  fromByteBufferLittleEndian(buffer, 69)-9000000;
-        eit7 =  fromByteBufferLittleEndian(buffer, 73)-9000000;
-        eit8 =  fromByteBufferLittleEndian(buffer, 77)-9000000;
-        eit9 =  fromByteBufferLittleEndian(buffer, 81)-9000000;
-        eit10 =  fromByteBufferLittleEndian(buffer, 85)-9000000;
-        eit11 =  fromByteBufferLittleEndian(buffer, 89)-9000000;
-        eit12 =  fromByteBufferLittleEndian(buffer, 93)-9000000;
+        eit1 =  fromByteBufferLittleEndian(buffer, 49);
+        eit2 =  fromByteBufferLittleEndian(buffer, 53);
+        eit3 =  fromByteBufferLittleEndian(buffer, 57);
+        eit4 =  fromByteBufferLittleEndian(buffer, 61);
+        eit5 =  fromByteBufferLittleEndian(buffer, 65);
+        eit6 =  fromByteBufferLittleEndian(buffer, 69);
+        eit7 =  fromByteBufferLittleEndian(buffer, 73);
+        eit8 =  fromByteBufferLittleEndian(buffer, 77);
+        eit9 =  fromByteBufferLittleEndian(buffer, 81);
+        eit10 =  fromByteBufferLittleEndian(buffer, 85);
+        eit11 =  fromByteBufferLittleEndian(buffer, 89);
+        eit12 =  fromByteBufferLittleEndian(buffer, 93);
 
         buffer.rewind();
 //        hex = HexFormat.of().formatHex(buffer.array());

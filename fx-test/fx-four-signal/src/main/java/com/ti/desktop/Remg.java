@@ -9,6 +9,7 @@ import com.ti.serial.checkers.SawProtocolParser;
 import com.ti.serial.command.SingleSignalCommand;
 import com.ti.serial.command.SingleSignalType;
 import com.ti.serial.device.FileByteProducer;
+import com.ti.serial.device.SerialPortDevice;
 import com.ti.serial.implem.SawUnit;
 import com.ti.signals.AdvanceSignalBox;
 import javafx.application.Application;
@@ -59,14 +60,17 @@ public class Remg extends Application {
         SawUnit<RemgSignalCommand> unit = new SawUnit<>(parser,parser, RemgSignalCommand::new);
         unit.setBox(box);
 
-//        Path file = Paths.get(this.getClass().getResource(TEST_FILE).toURI());
-        Path file = Paths.get(Objects.requireNonNull(FileByteProducerTest.class.getResource(TEST_FILE)).toURI());
-        FileByteProducer device = new FileByteProducer(file, FileByteProducer.ReadType.READ_CONTINIOUS);
-//        ComPortWorker device = new ComPortWorker("COM10", 115200*4);
-//         TODO: 21.01.2018 remove after full migrate to commlite
-        device.liteProtocol = true;
-        device.setProtocol(unit);
-        device.readWithDelay(50, 1000);
+////        Path file = Paths.get(this.getClass().getResource(TEST_FILE).toURI());
+//        Path file = Paths.get(Objects.requireNonNull(FileByteProducerTest.class.getResource(TEST_FILE)).toURI());
+//        FileByteProducer device = new FileByteProducer(file, FileByteProducer.ReadType.READ_CONTINIOUS);
+////        SerialPortDevice device = new SerialPortDevice("COM4", 921600);
+////         TODO: 21.01.2018 remove after full migrate to commlite
+//        device.liteProtocol = true;
+//        device.setProtocol(unit);
+//        device.readWithDelay(50, 1000);
+
+        SerialPortDevice terminal = new SerialPortDevice("COM4", 921600);
+
 
 //        ByteUnit byteUnit = new ByteUnit();
 //        byteUnit.setDevice(device2);

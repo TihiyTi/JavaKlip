@@ -41,7 +41,7 @@
   </left>
 
 
-<!--  <bottom>-->
-<!--    <fx:include fx:id="controlPanel"  source="ControlPanel.fxml"/>-->
-<!--  </bottom>-->
+  <bottom>
+    <fx:include fx:id="controlPanel"  source="RemgControlPanel.fxml"/>
+  </bottom>
 </BorderPane>

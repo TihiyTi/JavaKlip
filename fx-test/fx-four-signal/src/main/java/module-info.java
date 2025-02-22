@@ -7,6 +7,8 @@ module com.ti.desktop{
     requires javafx.graphics;
     requires java.desktop;
     requires com.fazecast.jSerialComm;
+
+//    requires org.fxmisc.richtext;
 //    requires jakarta.xml.bind;
 
 //    requires org.scream3r.jssc;

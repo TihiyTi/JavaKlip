@@ -111,8 +111,8 @@ public class SerialPortDevice implements DeviceInterface{
                 deque.add(element);
             }
 
-            System.out.println(Arrays.toString(buf));
-            System.out.println(new String(buf));
+//            System.out.println(Arrays.toString(buf));
+//            System.out.println(new String(buf));
 //            LOG.info("Recieve " + buf.length + " bytes from " + port.getPortName());
 
             if(liteProtocol){
