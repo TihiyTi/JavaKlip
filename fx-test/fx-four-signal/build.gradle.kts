@@ -5,7 +5,7 @@ plugins {
     id("org.beryx.jlink") version "2.26.0"
 
     id("org.javamodularity.moduleplugin") version "1.8.15"
-    id("org.gradlex.java-module-dependencies") version "1.4.1"
+//    id("org.gradlex.java-module-dependencies") version "1.4.1"
 
     id("org.openjfx.javafxplugin") version "0.1.0"
 }
