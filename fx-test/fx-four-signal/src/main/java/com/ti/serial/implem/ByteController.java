@@ -4,6 +4,7 @@ package com.ti.serial.implem;
 import com.ti.serial.protocol.AbstractSerialController;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -12,6 +13,8 @@ public class ByteController extends AbstractSerialController<ByteBuffer,ByteBuff
 
     @Override
     public void serviceRequest(ByteBuffer command) {
+        command.rewind();
+        System.out.println("Add:" + StandardCharsets.UTF_8.decode(command));
         for (byte b : command.array()) {
             testQueue.add(b);
         }

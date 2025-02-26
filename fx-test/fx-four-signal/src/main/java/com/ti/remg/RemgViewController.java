@@ -19,12 +19,14 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
     @FXML
     public VBox chartHBox;
     public BorderPane controlPanel;
+    public BorderPane remgControlPanel;
 
     List<RealTimeMultiChartConsumer> realTimeMultiChartConsumers;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("RemgViewController initialize");
         addChartsToBox();
     }
 

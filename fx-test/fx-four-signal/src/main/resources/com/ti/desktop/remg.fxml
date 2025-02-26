@@ -28,9 +28,10 @@
 
 
   <left>
-    <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="157.0">
+    <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="200.0">
       <children>
-        <TextField fx:id="portname" prefWidth="66.0" />
+<!--        <TextField fx:id="portname" prefWidth="66.0" />-->
+        <fx:include fx:id="remgControlPanel"  source="RemgControlPanel.fxml"/>
 <!--        <Button mnemonicParsing="false" onAction="#reopen" text="ReopenPort" />-->
 <!--        <Button mnemonicParsing="false" onAction="#changeState" text="EmulateStateChange" />-->
       </children>
@@ -42,6 +43,6 @@
 
 
   <bottom>
-    <fx:include fx:id="controlPanel"  source="RemgControlPanel.fxml"/>
+
   </bottom>
 </BorderPane>

@@ -5,10 +5,11 @@ module com.ti.desktop{
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.graphics;
+    requires javafx.web;
     requires java.desktop;
     requires com.fazecast.jSerialComm;
 
-//    requires org.fxmisc.richtext;
+    requires org.fxmisc.richtext;
 //    requires jakarta.xml.bind;
 
 //    requires org.scream3r.jssc;

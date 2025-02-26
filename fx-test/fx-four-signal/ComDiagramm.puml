@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantOrderStrategy none
+skinparam DefaultFontSize 8
+
+'autonumber
+participant Alice
+participant Charlie
+participant Bob
+
+Alice -> Bob:<size:10>Привет Authentication Request</size>
+Bob --> Alice: Приве, ис
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+
+
+@enduml
