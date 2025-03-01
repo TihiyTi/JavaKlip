@@ -1,19 +1,55 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+actor User
 
-skinparam ParticipantOrderStrategy none
-skinparam DefaultFontSize 8
+participant DeviceInterface
+participant SerialPortDevice
+participant SimpleProtocolListener
 
-'autonumber
-participant Alice
-participant Charlie
-participant Bob
+skinparam ParticipantBackgroundColor LightBlue
+participant Protocol
+participant AbstractProtocol
+participant ByteFlowProtocol
 
-Alice -> Bob:<size:10>Привет Authentication Request</size>
-Bob --> Alice: Приве, ис
+skinparam ParticipantBackgroundColor Default
+participant ByteController
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+User -> ByteController : send(byte[] / ByteBuffer)
+ByteController -> ByteFlowProtocol : toServiceResponse(ByteBuffer)
 
+group Обработка данных по протоколу
+    ByteFlowProtocol -> AbstractProtocol : upByteBuffer(ByteBuffer)
+    AbstractProtocol -> Protocol : createByteToRequest(ByteBuffer)
+end
+
+AbstractProtocol -> ByteController : serviceRequest(REQUEST)
+
+ByteFlowProtocol -> SerialPortDevice : sendDataArray(ByteBuffer)
+
+SerialPortDevice -> SerialPortDevice : openPort()
+SerialPortDevice -> SerialPortDevice : addListener()
+SerialPortDevice -> SimpleProtocolListener : new SimpleProtocolListener()
+
+SimpleProtocolListener -> SerialPortDevice : serialEvent(SerialPortEvent)
+
+alt liteProtocol = true
+    SimpleProtocolListener -> ByteFlowProtocol : parse(deque)
+else
+    SimpleProtocolListener -> ByteFlowProtocol : checkProtocol(deque)
+    SimpleProtocolListener -> ByteFlowProtocol : parseQueue(deque)
+end
+
+ByteFlowProtocol -> AbstractProtocol : upByteBuffer(ByteBuffer)
+AbstractProtocol -> Protocol : createByteToRequest(ByteBuffer)
+
+AbstractProtocol -> ByteController : serviceRequest(REQUEST)
+
+note left
+DeviceInterface - интерфейс устройства.
+SerialPortDevice - реализация для UART.
+Protocol - интерфейс протокола.
+AbstractProtocol - базовая реализация протокола.
+ByteFlowProtocol - конкретная реализация.
+ByteController - контроллер для работы с данными.
+end note
 
 @enduml

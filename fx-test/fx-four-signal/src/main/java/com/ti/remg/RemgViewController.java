@@ -14,12 +14,15 @@ import java.util.stream.Stream;
 
 public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalType> implements Initializable {
     @FXML
-    public BorderPane border;
+    private BorderPane remgBorder;
+
+    @FXML
+    private BorderPane remgControlPanel;
+    @FXML
+    private RemgControlController remgControlPanelController;
 
     @FXML
     public VBox chartHBox;
-    public BorderPane controlPanel;
-    public BorderPane remgControlPanel;
 
     List<RealTimeMultiChartConsumer> realTimeMultiChartConsumers;
 
@@ -67,4 +70,7 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
 //        addTypedConsumerToMap(RemgSignalType.EMG1, realTimeMultiChartConsumers.get(0).listeners.get(0));
     }
 
+    public RemgControlController getRemgControlController() {
+        return remgControlPanelController;
+    }
 }

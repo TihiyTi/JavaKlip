@@ -26,7 +26,7 @@ public class TerminalWebViewExample extends Application {
             delay.play();
         });
 
-        VBox root = new VBox(terminal.getWebView());
+        VBox root = new VBox(terminal);
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setTitle("WebView Terminal");
         primaryStage.show();

@@ -1,9 +1,10 @@
-package com.ti.serial.checkers;
+package com.ti.serial.def.protocol;
 
 
 
-import com.ti.serial.protocol.AbstractProtocol;
-import com.ti.serial.protocol.ProtocolCheckable;
+import com.ti.serial.common.protocol.CommandSplittable;
+import com.ti.serial.common.protocol.ProtocolCheckable;
+import com.ti.serial.def.AbstractProtocol;
 
 import java.nio.ByteBuffer;
 import java.util.Map;

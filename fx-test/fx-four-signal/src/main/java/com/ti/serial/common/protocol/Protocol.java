@@ -1,6 +1,6 @@
-package com.ti.serial.protocol;
+package com.ti.serial.common.protocol;
 
-import com.ti.serial.device.DeviceInterface;
+import com.ti.serial.common.device.DeviceInterface;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.ConcurrentLinkedDeque;

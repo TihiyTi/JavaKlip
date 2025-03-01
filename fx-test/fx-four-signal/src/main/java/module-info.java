@@ -9,7 +9,8 @@ module com.ti.desktop{
     requires java.desktop;
     requires com.fazecast.jSerialComm;
 
-    requires org.fxmisc.richtext;
+    requires java.sql;
+    requires org.slf4j;
 //    requires jakarta.xml.bind;
 
 //    requires org.scream3r.jssc;

@@ -1,11 +1,12 @@
 package com.ti.desktop;
 
-import com.ti.serial.device.ByteRandomProducer;
-import com.ti.serial.device.DeviceInterface;
-import com.ti.serial.device.FileByteProducer;
-import com.ti.serial.implem.ByteController;
-import com.ti.serial.implem.ByteFlowProtocol;
+import com.ti.serial.common.device.FileByteProducer;
+import com.ti.serial.def.controller.ByteController;
+import com.ti.serial.def.protocol.ByteFlowProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 
 public class FileByteProducerTest {
-
+    private static final Logger logger = LoggerFactory.getLogger(FileByteProducerTest.class);
     private static final String TEST_FILE = "testFile.bin";
 
     public static void main(String[] args) throws URISyntaxException {
@@ -36,7 +37,10 @@ public class FileByteProducerTest {
 
         HexFormat hexFormat = HexFormat.of();
 
+        logger.info("File save to: {}", (new File(".")).getAbsolutePath());
+        logger.trace(Arrays.toString(inputController.testQueue.toArray()));
         System.out.println(Arrays.toString(inputController.testQueue.toArray()));
+
         System.out.println(inputController.testQueue.stream().map(b -> hexFormat.toHexDigits((byte)(b & 0xFF))) // Преобразуем Byte в int и в HEX
                 .collect(Collectors.joining(" ")));
 

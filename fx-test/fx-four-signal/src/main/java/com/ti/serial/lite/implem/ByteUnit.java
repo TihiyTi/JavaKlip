@@ -1,9 +1,9 @@
-package com.ti.serial.implem;
+package com.ti.serial.lite.implem;
 
 
-import com.ti.serial.SerialControllable;
-import com.ti.serial.protocol.AbstractProtocolLite;
-import com.ti.serial.protocol.Protocol;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.lite.protocol.AbstractProtocolLite;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.ConcurrentLinkedDeque;

@@ -1,6 +1,6 @@
 package com.ti.desktop;
 
-import com.ti.serial.device.ByteRandomProducer;
+import com.ti.serial.common.device.ByteRandomProducer;
 
 public class ByteProducerTest{
     public static void main(String[] args) {

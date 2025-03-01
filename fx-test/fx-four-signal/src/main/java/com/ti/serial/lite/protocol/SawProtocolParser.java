@@ -1,8 +1,8 @@
-package com.ti.serial.checkers;
+package com.ti.serial.lite.protocol;
 
 
 
-import com.ti.serial.protocol.AbstractProtocol;
+import com.ti.serial.def.AbstractProtocol;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

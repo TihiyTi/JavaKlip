@@ -1,13 +1,14 @@
-package com.ti.serial.implem;
+package com.ti.serial.lite.implem;
 
 import com.ti.serial.*;
 import com.ti.serial.command.AbstractCommand;
 import com.ti.serial.command.AbstractSawCommand;
-import com.ti.serial.protocol.AbstractProtocolLite;
-import com.ti.serial.protocol.CommandSplittableLite;
-import com.ti.serial.protocol.ProtocolCheckable;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.lite.protocol.AbstractProtocolLite;
+import com.ti.serial.lite.protocol.CommandSplittableLite;
+import com.ti.serial.common.protocol.ProtocolCheckable;
 import com.ti.signals.AdvanceSignalBox;
-import com.ti.serial.protocol.Protocol;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 import java.util.function.Supplier;

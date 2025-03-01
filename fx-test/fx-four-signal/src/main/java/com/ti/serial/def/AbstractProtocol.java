@@ -1,11 +1,13 @@
-package com.ti.serial.protocol;
+package com.ti.serial.def;
 
 import com.ti.PropertiesService;
-import com.ti.serial.SerialControllable;
-import com.ti.serial.checkers.CommandSplittable;
-import com.ti.serial.checkers.OneSynchroByteProtocolChecker;
-import com.ti.serial.checkers.SawSynchroByteProtocolChecker;
-import com.ti.serial.device.DeviceInterface;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.common.protocol.CommandSplittable;
+import com.ti.serial.def.protocol.OneSynchroByteProtocolChecker;
+import com.ti.serial.def.protocol.SawSynchroByteProtocolChecker;
+import com.ti.serial.common.protocol.Protocol;
+import com.ti.serial.common.device.DeviceInterface;
+import com.ti.serial.common.protocol.ProtocolCheckable;
 
 
 //import javax.xml.bind.DatatypeConverter;
@@ -76,7 +78,7 @@ public abstract class AbstractProtocol<RESPONSE, REQUEST> implements Protocol<RE
     }
     public void upByteBuffer(ByteBuffer buffer){
 //        LOG.trace("FromUART: " + Arrays.toString(buffer.array()));
-//        System.out.println("FromUART: " + Arrays.toString(buffer.array()));
+        System.out.println("FromUART: " + Arrays.toString(buffer.array()));
         REQUEST request = protocolList.stream().map(x->x.createByteToRequest(buffer)).filter(x->(x!=null)).findFirst().get();
         serialControllableList.forEach(x->x.serviceRequest(request));
     }

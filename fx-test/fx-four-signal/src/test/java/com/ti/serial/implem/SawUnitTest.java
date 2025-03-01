@@ -1,12 +1,12 @@
 package com.ti.serial.implem;
 
-import com.ti.serial.checkers.SawProtocolParser;
+import com.ti.serial.lite.protocol.SawProtocolParser;
 import com.ti.serial.command.TestSawCommand;
 import com.ti.serial.command.TestSignalType;
+import com.ti.serial.lite.implem.SawUnit;
 import com.ti.signals.AdvanceSignalBox;
 import com.ti.signals.FinalSaveFilter;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

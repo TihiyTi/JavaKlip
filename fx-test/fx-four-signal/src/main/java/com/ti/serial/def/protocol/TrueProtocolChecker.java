@@ -1,6 +1,6 @@
-package com.ti.serial.checkers;
+package com.ti.serial.def.protocol;
 
-import com.ti.serial.protocol.ProtocolCheckable;
+import com.ti.serial.common.protocol.ProtocolCheckable;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
 

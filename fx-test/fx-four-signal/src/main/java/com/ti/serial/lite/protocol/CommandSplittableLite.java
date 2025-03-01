@@ -1,4 +1,4 @@
-package com.ti.serial.protocol;
+package com.ti.serial.lite.protocol;
 
 import java.nio.ByteBuffer;
 import java.util.List;

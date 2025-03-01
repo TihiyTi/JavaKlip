@@ -1,14 +1,13 @@
-package com.ti.serial.device;
+package com.ti.serial.common.device;
 
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.ti.PropertiesService;
-import com.ti.serial.protocol.AbstractProtocol;
-import com.ti.serial.protocol.Protocol;
+import com.ti.serial.def.AbstractProtocol;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class SerialPortDevice implements DeviceInterface{

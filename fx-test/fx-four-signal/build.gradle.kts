@@ -32,9 +32,6 @@ dependencies{
 
     implementation("com.fazecast:jSerialComm:2.11.0")
 
-    implementation("org.fxmisc.richtext:richtextfx:0.11.0")
-    implementation("org.fxmisc.flowless:flowless:0.6.10")
-
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
 
@@ -42,6 +39,11 @@ dependencies{
     implementation("org.openjfx:javafx-graphics:21.0.6-ea+2:win")
     implementation("org.openjfx:javafx-fxml:21.0.6-ea+2:win")
     implementation("org.openjfx:javafx-web:21.0.6-ea+2:win")
+
+    implementation("org.slf4j:slf4j-api:2.0.11")  // SLF4J API
+    implementation("ch.qos.logback:logback-classic:1.4.14")  // Logback (реализация SLF4J)
+
+
 
    // implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 }

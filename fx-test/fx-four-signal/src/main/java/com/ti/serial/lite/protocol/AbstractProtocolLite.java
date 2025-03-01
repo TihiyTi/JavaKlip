@@ -1,7 +1,9 @@
-package com.ti.serial.protocol;
+package com.ti.serial.lite.protocol;
 
-import com.ti.serial.device.DeviceInterface;
-import com.ti.serial.SerialControllable;
+import com.ti.serial.common.protocol.Protocol;
+import com.ti.serial.common.device.DeviceInterface;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.common.protocol.ProtocolCheckable;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 

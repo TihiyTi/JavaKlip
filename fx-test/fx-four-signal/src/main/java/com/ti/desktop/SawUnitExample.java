@@ -1,12 +1,11 @@
 package com.ti.desktop;
 
 import com.ti.dspview.FxGraphicBuilder;
-import com.ti.dspview.FxGraphicBuilder2;
-import com.ti.serial.checkers.SawProtocolParser;
+import com.ti.serial.lite.protocol.SawProtocolParser;
 import com.ti.serial.command.SingleSignalCommand;
 import com.ti.serial.command.SingleSignalType;
-import com.ti.serial.device.FileByteProducer;
-import com.ti.serial.implem.SawUnit;
+import com.ti.serial.common.device.FileByteProducer;
+import com.ti.serial.lite.implem.SawUnit;
 import com.ti.signals.AdvanceSignalBox;
 import com.ti.signals.FinalSaveFilter;
 

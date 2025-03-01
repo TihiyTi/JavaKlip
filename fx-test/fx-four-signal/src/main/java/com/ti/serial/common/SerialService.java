@@ -1,8 +1,8 @@
-package com.ti.serial.implem;
+package com.ti.serial.common;
 
-import com.ti.serial.SerialControllable;
-import com.ti.serial.device.SerialPortDevice;
-import com.ti.serial.protocol.AbstractProtocol;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.common.device.SerialPortDevice;
+import com.ti.serial.def.AbstractProtocol;
 
 import java.util.ArrayList;
 import java.util.Arrays;

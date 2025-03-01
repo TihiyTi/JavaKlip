@@ -1,8 +1,8 @@
-package com.ti.serial.device;
+package com.ti.serial.common.device;
 
 import com.ti.FileService;
-import com.ti.serial.protocol.AbstractProtocol;
-import com.ti.serial.protocol.Protocol;
+import com.ti.serial.def.AbstractProtocol;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.function.ToDoubleBiFunction;
 
 public class FileByteProducer implements DeviceInterface{
 //    private static final Logger LOG = LogManager.getLogger("TiSerialServiceLogger");

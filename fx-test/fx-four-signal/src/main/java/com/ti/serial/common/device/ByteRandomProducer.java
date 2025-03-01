@@ -1,6 +1,6 @@
-package com.ti.serial.device;
+package com.ti.serial.common.device;
 
-import com.ti.serial.protocol.Protocol;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;

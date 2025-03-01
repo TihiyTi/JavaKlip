@@ -1,92 +1,94 @@
 package com.ti.remg;
 
+import com.ti.dspview.TerminalWebView;
+import com.ti.serial.def.controller.ByteController;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import org.fxmisc.richtext.CodeArea;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class RemgControlController implements Initializable {
     @FXML
-    public CodeArea terminal;
-    private int areaBackWallPosition; // Граница редактируемой области
-    private int promptPosition; // Граница редактируемой области
+    public BorderPane border;
 
+    @FXML
+    public TerminalWebView terminal;
+    public ComboBox chooseChannel;
+    @FXML
+    public ListView<String> listView;
+    public Button ping;
+
+    private ByteController byteController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        terminal.appendText("Welcome to REMG terminal!\n> ");
-        promptPosition = terminal.getLength();
-        terminal.moveTo(promptPosition);
 
-        terminal.setOnKeyPressed(this::handleKeyPress);
-        terminal.setOnKeyTyped(this::handleKeyTyped);
-        terminal.setOnKeyReleased(this::handleKeyReleased);
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
+        // Добавляем слушатель к списку выбранных элементов
+//        listView.addEventHandler((obs, oldSelection, newSelection) -> {
+//            ObservableList<String> selectedItems = listView.getSelectionModel().getSelectedItems();
+//            System.out.println("Выбрано: " + selectedItems);
+//        });
+        terminal.setCommandHandler(command -> {
+//            System.out.println("Отправлена команда: " + command);
+            byteController.send(command.getBytes());
+            // Эмулируем задержку ответа
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+
+            delay.setOnFinished(e -> Platform.runLater(() -> {
+                List<Byte> byteList = new ArrayList<>();
+                byteController.testQueue.drainTo(byteList);
+                System.out.println("Длина после drain: "+byteController.testQueue.size());
+                String result = byteList.stream()
+                        .map(b -> String.valueOf((char) (b.byteValue()))) // Byte → char → String
+                        .collect(Collectors.joining());
+                System.out.println("Ответ устройства: " + result);
+                terminal.sendResponse(result);
+
+            }));
+            delay.play();
+        });
     }
 
-    private void handleKeyReleased(KeyEvent keyEvent) {
-        System.out.println("Released: "+terminal.getCaretPosition());
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-            System.out.println("Released BackSpase: "+terminal.getCaretPosition());
-            keyEvent.consume(); // Предотвращаем любые изменения перед границей
-//            terminal.moveTo(areaBackWallPosition);
+    public void setByteController(ByteController byteController) {
+        this.byteController = byteController;
+    }
+
+    public void handleOrder(ActionEvent actionEvent) {
+
+//        byteController.send();
+    }
+
+    public void handlePing(ActionEvent actionEvent) {
+//        pingChannel(0);
+        pingAllChannel(0);
+    }
+    private void pingChannel(int channel) {
+        terminal.typeAndSendEmulate("d "+ channel + " ver");
+    }
+
+    private void pingAllChannel(int ch){
+        if (ch == 12) {
+            return;
         }
-
-    }
-
-    private void handleKeyPress(KeyEvent event) {
-        System.out.println("Press: "+terminal.getCaretPosition());
-        if(event.getCode() == KeyCode.ENTER){
-            areaBackWallPosition = terminal.getCaretPosition();
-        }else if(/*event.getCode() == KeyCode.LEFT || */event.getCode() == KeyCode.BACK_SPACE){
-            System.out.println("Press BackSpase: "+terminal.getCaretPosition());
-            event.consume();
-//            if (terminal.getCaretPosition() <= areaBackWallPosition) {
-//                terminal.moveTo(areaBackWallPosition);
-//                System.out.println("Возврат к :" + areaBackWallPosition);
-//            }
-        }
-    }
-    private void handleKeyTyped(KeyEvent event) {
-        System.out.println("Typed: "+terminal.getCaretPosition());
-        if (event.getCode() == KeyCode.BACK_SPACE) {
-            System.out.println("Typed BackSpase: "+terminal.getCaretPosition());
-            event.consume(); // Предотвращаем любые изменения перед границей
-//            terminal.moveTo(areaBackWallPosition);
-        }
-    }
-
-//    private void handleKeyTyped(KeyEvent event) {
-//         Запрещаем вставку текста перед границей
-//        if (terminal.getCaretPosition() < promptPosition) {
-//            event.consume();
-//            terminal.moveTo(promptPosition);
-//        }
-//    }
-
-    private void processCommand() {
-        // Безопасное извлечение текста, предотвращающее ошибки с границами
-//        if (terminal.getLength() > promptPosition) {
-//            String command = terminal.getText(promptPosition, terminal.getLength()).trim();
-//            executeCommand(command);
-//        }
-
-        // Добавляем новый промпт и запрещаем редактирование старых строк
-//        terminal.appendText("\n> ");
-//        promptPosition = terminal.getLength();
-//        terminal.moveTo(promptPosition);
-    }
-
-    private void executeCommand(String command) {
-        if (command.equalsIgnoreCase("clear")) {
-            terminal.clear();
-            terminal.appendText("Welcome to REMG terminal!\n> ");
-            promptPosition = terminal.getLength();
-        } else {
-            terminal.appendText("\nExecuted: " + command);
-        }
+        PauseTransition pause = new PauseTransition(Duration.millis(600));
+        pause.setOnFinished(event -> pingAllChannel(ch+1));
+        pause.play();
+        terminal.typeAndSendEmulate("d "+ ch + " ver");
     }
 }

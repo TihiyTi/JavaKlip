@@ -1,9 +1,6 @@
 package com.ti.desktop;
 
-import com.ti.serial.device.SerialPortDevice;
-
-import java.nio.ByteBuffer;
-import java.util.Random;
+import com.ti.serial.common.device.SerialPortDevice;
 
 public class SerialCommExample2 {
     public static void main(String[] args) {

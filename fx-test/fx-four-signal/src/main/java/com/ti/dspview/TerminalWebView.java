@@ -2,30 +2,36 @@ package com.ti.dspview;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.scene.web.WebView;
+import javafx.scene.layout.Region;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.util.function.Consumer;
 
-public class TerminalWebView {
+public class TerminalWebView extends Region {
     private final WebView webView;
-    private final StringBuilder terminalContent = new StringBuilder("> "); // Храним историю терминала
-    private String currentCommand = ""; // Введенная команда
-    private Consumer<String> commandHandler; // Обработчик команд
+    private final StringBuilder terminalContent = new StringBuilder("> ");
+    private String currentCommand = "";
+    private Consumer<String> commandHandler;
 
     public TerminalWebView() {
         webView = new WebView();
-        webView.setPrefHeight(400); // Размер по умолчанию
 
-        // Обновляем отображение
-        updateWebView();
+        webView.setPrefHeight(400); // Ограничиваем высоту
+        webView.setMaxHeight(500);
 
-        // Добавляем обработчик клавиш
+        webView.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        webView.setMaxWidth(Double.MAX_VALUE);
+
+//        webView.setPrefHeight(400);
+        getChildren().add(webView); // Добавляем WebView в панель
+
+        widthProperty().addListener((obs, oldWidth, newWidth) -> webView.setPrefWidth(newWidth.doubleValue()));
+
+        updateWebView("TerminalWebView");
         webView.setOnKeyPressed(this::handleKeyPress);
-
-        // Фокусируем WebView
         Platform.runLater(webView::requestFocus);
     }
 
@@ -38,63 +44,86 @@ public class TerminalWebView {
     }
 
     private void handleKeyPress(KeyEvent event) {
-        // Обрабатываем символы (только печатные)
         if (event.getText().matches("\\S") || event.getText().equals(" ")) {
             currentCommand += event.getText();
-            updateWebView();
+            updateWebView("handleKeyPress simbol");
         }
-        // Обрабатываем Backspace
         else if (event.getCode() == KeyCode.BACK_SPACE && !currentCommand.isEmpty()) {
             currentCommand = currentCommand.substring(0, currentCommand.length() - 1);
-            updateWebView();
+            updateWebView("BACK_SPACE");
         }
-        // Запрещаем UP для перемещения назад
         else if (event.getCode() == KeyCode.UP) {
             event.consume();
         }
-        // Обрабатываем ENTER
         else if (event.getCode() == KeyCode.ENTER) {
             event.consume();
+//            currentCommand += "\n";
             processCommand();
         }
     }
 
-    private void processCommand() {
-        String command = currentCommand.trim();
-        terminalContent.append(currentCommand).append("\n");
-        currentCommand = ""; // Очищаем ввод
+    public void typeAndSendEmulate(String command) {
+        currentCommand += command;
+        updateWebView("typeAndSendEmulate");
+        processCommand();
+    }
 
-        updateWebView();
+    private void processCommand() {
+        String command = currentCommand;
+        System.out.println("To send:"+ currentCommand + " -> " + currentCommand.replace("\n", "\\n").replace("\r", "\\r"));
+//        terminalContent.append(currentCommand).append("\n");
+        currentCommand = "";
+
+        updateWebView("processCommand");
 
         if (commandHandler != null) {
-            commandHandler.accept(command); // Передаем команду в обработчик
+            commandHandler.accept(command + "\n");
         }
     }
 
     public void sendResponse(String response) {
         Platform.runLater(() -> {
-            terminalContent.append(response).append("\n");
+            System.out.println("Response: " + response);
+            terminalContent.append(response);//.append("\n");
             addPrompt();
         });
     }
 
     private void addPrompt() {
         terminalContent.append("> ");
-        updateWebView();
+        updateWebView("addPrompt");
     }
 
-    private void updateWebView() {
+    private void updateWebViewPromt() {
         Platform.runLater(() -> {
-            String highlightedText = terminalContent.toString() + currentCommand;
+            String displayedText = terminalContent.toString();
 
-            // Подсветка ключевых слов
-            highlightedText = highlightedText
-                    .replaceAll("\\b(if|else|for|while|return)\\b", "<span style='color: blue; font-weight: bold;'>$1</span>")
-                    .replaceAll("\n", "<br>");
+            String highlightedText = displayedText
+                    .replaceAll("\\b(ver|reset|config|save|d)\\b", "<span style='color: blue; font-weight: bold;'>$1</span>")
+                    ;
 
             String htmlContent = "<html><body style='font-family: monospace; white-space: pre-wrap;'>"
                     + highlightedText +
-                    "<span style='background: #ccc;'>&#8203;</span></body></html>"; // Имитация курсора
+                    "<span style='background: #ccc;'>&#8203;</span></body></html>";
+
+            webView.getEngine().loadContent(htmlContent);
+        });
+    }
+
+    private void updateWebView(String from) {
+        System.out.println("From " + from);
+        Platform.runLater(() -> {
+            String displayedText = terminalContent.toString();
+            if (!currentCommand.isEmpty()) {
+                displayedText += currentCommand;
+            }
+
+            String highlightedText = displayedText
+                    .replaceAll("\\b(ver|reset|config|save|d)\\b", "<span style='color: blue; font-weight: bold;'>$1</span>");
+
+            String htmlContent = "<html><body style='font-family: monospace; white-space: pre-wrap;'>"
+                    + highlightedText +
+                    "<span style='background: #ccc;'>&#8203;</span></body></html>";
 
             webView.getEngine().loadContent(htmlContent);
         });

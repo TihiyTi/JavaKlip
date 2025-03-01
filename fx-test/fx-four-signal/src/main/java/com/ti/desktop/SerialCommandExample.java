@@ -1,9 +1,9 @@
 package com.ti.desktop;
 
-import com.ti.serial.device.SerialPortDevice;
-import com.ti.serial.implem.ByteController;
-import com.ti.serial.implem.ByteFlowProtocol;
-import com.ti.serial.implem.SerialService;
+import com.ti.serial.common.device.SerialPortDevice;
+import com.ti.serial.def.controller.ByteController;
+import com.ti.serial.def.protocol.ByteFlowProtocol;
+import com.ti.serial.common.SerialService;
 
 import java.nio.ByteBuffer;
 

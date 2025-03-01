@@ -1,17 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<?import org.fxmisc.richtext.CodeArea?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ti.remg.RemgControlController">
+<!--<?import com.ti.dspview.TerminalWebView?>-->
+<?import com.ti.dspview.TerminalWebView?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+<BorderPane fx:id="border" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ti.remg.RemgControlController">
   <center>
-    <VBox spacing="10.0">
+    <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+<!--      <Label text="Верхняя область" />-->
       <StackPane style="-fx-border-color: red; -fx-border-width: 2;">
-        <CodeArea fx:id="terminal" wrapText="true" prefWidth="400" />
+        <TerminalWebView fx:id="terminal" />
       </StackPane>
     </VBox>
   </center>
+   <top>
+       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+           <Button fx:id="ping" text="Ping registrators" onAction="#handlePing"/>
+           <HBox alignment="CENTER" spacing="5">
+               <Label text="Установить в канал"/>
+               <ComboBox fx:id="oldOrder" prefWidth="100.0" promptText="ORD 0">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Ch 0"/>
+                           <String fx:value="Ch 1"/>
+                           <String fx:value="Ch 2"/>
+                           <String fx:value="Ch 3"/>
+                           <String fx:value="Ch 4"/>
+                           <String fx:value="Ch 5"/>
+                           <String fx:value="Ch 6"/>
+                           <String fx:value="Ch 7"/>
+                           <String fx:value="Ch 8"/>
+                           <String fx:value="Ch 9"/>
+                           <String fx:value="Ch 10"/>
+                           <String fx:value="Ch 11"/>
+                       </FXCollections>
+                   </items>
+               </ComboBox>
+               <ComboBox fx:id="newOrder" prefWidth="100.0" promptText="new ORD">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Канал 1"/>
+                           <String fx:value="Канал 2"/>
+                           <String fx:value="Канал 3"/>
+                           <String fx:value="Канал 4"/>
+                           <String fx:value="Канал 5"/>
+                           <String fx:value="Канал 6"/>
+                           <String fx:value="Канал 7"/>
+                           <String fx:value="Канал 8"/>
+                           <String fx:value="Канал 9"/>
+                           <String fx:value="Канал 10"/>
+                           <String fx:value="Канал 11"/>
+                           <String fx:value="Канал 12"/>
+                       </FXCollections>
+                   </items>
+               </ComboBox>
+               <Button fx:id="order" text="Set ORD" onAction="#handleOrder"/>
+
+           </HBox>
+
+<!--           <Label text="Верхняя область"/>-->
+<!--           <ComboBox fx:id="chooseChannel" prefWidth="150.0" promptText="Выбери канал">-->
+<!--               <items>-->
+<!--                   <FXCollections fx:factory="observableArrayList">-->
+<!--                       <String fx:value="Канал 1"/>-->
+<!--                       <String fx:value="Канал 2"/>-->
+<!--                       <String fx:value="Канал 3"/>-->
+<!--                       <String fx:value="Канал 4"/>-->
+<!--                       <String fx:value="Канал 5"/>-->
+<!--                       <String fx:value="Канал 6"/>-->
+<!--                       <String fx:value="Канал 7"/>-->
+<!--                       <String fx:value="Канал 8"/>-->
+<!--                       <String fx:value="Канал 9"/>-->
+<!--                       <String fx:value="Канал 10"/>-->
+<!--                       <String fx:value="Канал 11"/>-->
+<!--                       <String fx:value="Канал 12"/>-->
+<!--                   </FXCollections>-->
+<!--               </items>-->
+<!--           </ComboBox>-->
+<!--           <HBox alignment="CENTER" spacing="5">-->
+<!--               <ToggleButton text="Кнопка 1"/>-->
+<!--               <ToggleButton text="Кнопка 2"/>-->
+<!--               <ToggleButton text="Кнопка 3"/>-->
+<!--           </HBox>-->
+<!--           <ChoiceBox fx:id="choiceBox" prefWidth="150.0">-->
+<!--               <items>-->
+<!--                   <FXCollections fx:factory="observableArrayList">-->
+<!--                       <String fx:value="Опция 1"/>-->
+<!--                       <String fx:value="Опция 2"/>-->
+<!--                       <String fx:value="Опция 3"/>-->
+<!--                   </FXCollections>-->
+<!--               </items>-->
+<!--           </ChoiceBox>-->
+           <ListView fx:id="listView" prefWidth="150.0" prefHeight="120.0">
+               <items>
+                   <FXCollections fx:factory="observableArrayList">
+                       <String fx:value="Элемент 1"/>
+                       <String fx:value="Элемент 2"/>
+                       <String fx:value="Элемент 3"/>
+                       <String fx:value="Элемент 4"/>
+                   </FXCollections>
+               </items>
+           </ListView>
+       </VBox>
+   </top>
+
+<!--  <bottom>-->
+<!--    <HBox style="-fx-border-color: green; -fx-border-width: 2; -fx-padding: 5;">-->
+<!--      <Label text="Нижняя область" />-->
+<!--    </HBox>-->
+<!--  </bottom>-->
+
+<!--  <left>-->
+<!--    <VBox style="-fx-border-color: purple; -fx-border-width: 2; -fx-padding: 5;">-->
+<!--      <Label text="Левая область" />-->
+<!--    </VBox>-->
+<!--  </left>-->
+
+<!--  <right>-->
+<!--    <VBox style="-fx-border-color: orange; -fx-border-width: 2; -fx-padding: 5;">-->
+<!--      <Label text="Правая область" />-->
+<!--    </VBox>-->
+<!--  </right>-->
+
 </BorderPane>

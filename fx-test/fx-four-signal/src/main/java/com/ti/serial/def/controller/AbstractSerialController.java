@@ -1,6 +1,7 @@
-package com.ti.serial.protocol;
+package com.ti.serial.def.controller;
 
-import com.ti.serial.SerialControllable;
+import com.ti.serial.common.controller.SerialControllable;
+import com.ti.serial.common.protocol.Protocol;
 
 import java.util.ArrayList;
 import java.util.List;

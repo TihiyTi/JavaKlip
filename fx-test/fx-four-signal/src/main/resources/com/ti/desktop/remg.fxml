@@ -7,19 +7,20 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             style="-fx-border-color: blue; -fx-border-width: 3;"
+            fx:id="remgBorder"
             fx:controller="com.ti.remg.RemgViewController">
-  <top>
-    <MenuBar BorderPane.alignment="CENTER" >
-      <menus>
-        <Menu mnemonicParsing="false" text="Файл">
-          <items>
-            <MenuItem fx:id="connectSettings" mnemonicParsing="false" text="Настройки соединения" />
-            <!--          <MenuItem fx:id="exportfile" mnemonicParsing="false" text="Сохранить результаты" />-->
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-  </top>
+<!--  <top>-->
+<!--    <MenuBar BorderPane.alignment="CENTER" >-->
+<!--      <menus>-->
+<!--        <Menu mnemonicParsing="false" text="Файл">-->
+<!--          <items>-->
+<!--            <MenuItem fx:id="connectSettings" mnemonicParsing="false" text="Настройки соединения" />-->
+<!--            &lt;!&ndash;          <MenuItem fx:id="exportfile" mnemonicParsing="false" text="Сохранить результаты" />&ndash;&gt;-->
+<!--          </items>-->
+<!--        </Menu>-->
+<!--      </menus>-->
+<!--    </MenuBar>-->
+<!--  </top>-->
 
 
   <center>
@@ -28,7 +29,7 @@
 
 
   <left>
-    <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="200.0">
+    <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="400.0">
       <children>
 <!--        <TextField fx:id="portname" prefWidth="66.0" />-->
         <fx:include fx:id="remgControlPanel"  source="RemgControlPanel.fxml"/>
