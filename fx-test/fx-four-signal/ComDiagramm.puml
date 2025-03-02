@@ -1,49 +1,101 @@
 @startuml
+skin rose
 actor User
 
-participant DeviceInterface
+'participant DeviceInterface
 participant SerialPortDevice
-participant SimpleProtocolListener
 
-skinparam ParticipantBackgroundColor LightBlue
-participant Protocol
-participant AbstractProtocol
+skinparam ParticipantBackgroundColor LightGreen
+participant SerialService
+
+skinparam ParticipantBackgroundColor RoyalBlue
 participant ByteFlowProtocol
+skinparam ParticipantBackgroundColor LightBlue
+participant AbstractProtocol
+participant Protocol_REQUEST_RESPONSE as Protocol
 
-skinparam ParticipantBackgroundColor Default
+skinparam ParticipantBackgroundColor rose
+participant AbstractSerialController
+
+skinparam ParticipantBackgroundColor Orange
 participant ByteController
 
-User -> ByteController : send(byte[] / ByteBuffer)
-ByteController -> ByteFlowProtocol : toServiceResponse(ByteBuffer)
 
-group Обработка данных по протоколу
-    ByteFlowProtocol -> AbstractProtocol : upByteBuffer(ByteBuffer)
-    AbstractProtocol -> Protocol : createByteToRequest(ByteBuffer)
+
+
+group Инициализация
+User -> SerialPortDevice : new SerialPortDevice()
+User -> ByteFlowProtocol : new ByteFlowProtocol()
+User -> ByteController : new ByteController()
+User -> SerialService : new SerialService(DeviceInterface--SerialPortDevice)
+User -> SerialService : setProtocol(ByteFlowProtocol)
+User -> SerialService : setController(ByteController)
+
+SerialService -> AbstractProtocol: setSender(DeviceInterface--SerialPortDevice)
+SerialService -> SerialPortDevice: setProtocol(AbstractProtocol--ByteFlowProtocol)
+SerialPortDevice -> AbstractProtocol: setSender(DeviceInterface--SerialPortDevice)
+note left of AbstractProtocol
+    Судя по всему дублируется установка sender'a
+end note
+
 end
 
-AbstractProtocol -> ByteController : serviceRequest(REQUEST)
+'alt liteProtocol = true
+'    SerialPortDevice -> ByteFlowProtocol : parse(deque)
+'else
+loop
+    note left of SerialPortDevice
+    Данные поступают по UART
+    end note
+    '-> SerialPortDevice: данные с COM-порта
+    SerialPortDevice -> Protocol : boolean checkProtocol(deque)
+    Protocol -> AbstractProtocol: @Override boolean checkProtocol(deque)
+    note left of AbstractProtocol
+        По умолчанию вызывается
+        **protocolChecker.checkProtocol()**,
+        но в **ByteFlowProtocol** метод
+        переопределен, так как проверка
+        не производится
+    end note
+    AbstractProtocol -> ByteFlowProtocol: @Override boolean checkProtocol(deque)
 
-ByteFlowProtocol -> SerialPortDevice : sendDataArray(ByteBuffer)
+    SerialPortDevice -> Protocol : parseQueue(deque)
+    Protocol -> AbstractProtocol: @Override parseQueue(deque)
+    note left of AbstractProtocol
+            По умолчанию вызывается
+            **commandSplitter.parseQueue**,
+            но в ByteFlowProtocol
+            метод переопределен, так как
+            split не делается
+        end note
+    AbstractProtocol -> ByteFlowProtocol: @Override parseQueue(deque)
 
-SerialPortDevice -> SerialPortDevice : openPort()
-SerialPortDevice -> SerialPortDevice : addListener()
-SerialPortDevice -> SimpleProtocolListener : new SimpleProtocolListener()
+    ByteFlowProtocol -> AbstractProtocol: upByteBuffer(ByteBuffer)
+    AbstractProtocol -> Protocol: <color:blue><b><REQUEST></b></color> createByteToRequest(ByteBuffer)
+    note right of AbstractProtocol
+        В AbstractProtocol есть listOfProtocol
+        и у каждого Protocol вызывается createByteToRequest
+    end note
+    Protocol -> ByteFlowProtocol: @Override <color:blue><b><REQUEST></b></color> createByteToRequest(ByteBuffer)
+    AbstractProtocol -> ByteController: serviceRequest(<color:blue><b><REQUEST></b></color>)
 
-SimpleProtocolListener -> SerialPortDevice : serialEvent(SerialPortEvent)
-
-alt liteProtocol = true
-    SimpleProtocolListener -> ByteFlowProtocol : parse(deque)
-else
-    SimpleProtocolListener -> ByteFlowProtocol : checkProtocol(deque)
-    SimpleProtocolListener -> ByteFlowProtocol : parseQueue(deque)
 end
 
-ByteFlowProtocol -> AbstractProtocol : upByteBuffer(ByteBuffer)
-AbstractProtocol -> Protocol : createByteToRequest(ByteBuffer)
+loop
+    note left of ByteController
+    Данные поступают от программы
+    end note
+    ByteController -> AbstractSerialController: toServiceResponse(<color:blue><b><RESPONSE></b></color>)
+    AbstractSerialController -> Protocol: sendResponse(<color:blue><b><RESPONSE></b></color>)
+    Protocol -> AbstractProtocol: @Override ByteBuffer sendResponse(<color:blue><b><RESPONSE></b></color>)
+        note right of AbstractProtocol
+        По умолчанию вызывается commandSplitter.getSyncSequence
+        для определения суффикса пакета (синхро байт или синхро пила)
+        end note
+    AbstractProtocol -> SerialPortDevice: sendDataArray(ByteBuffer)
+end
 
-AbstractProtocol -> ByteController : serviceRequest(REQUEST)
-
-note left
+note right of User
 DeviceInterface - интерфейс устройства.
 SerialPortDevice - реализация для UART.
 Protocol - интерфейс протокола.
@@ -51,5 +103,6 @@ AbstractProtocol - базовая реализация протокола.
 ByteFlowProtocol - конкретная реализация.
 ByteController - контроллер для работы с данными.
 end note
+
 
 @enduml

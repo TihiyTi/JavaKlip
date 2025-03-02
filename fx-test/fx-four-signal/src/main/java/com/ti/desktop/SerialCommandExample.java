@@ -3,7 +3,7 @@ package com.ti.desktop;
 import com.ti.serial.common.device.SerialPortDevice;
 import com.ti.serial.def.controller.ByteController;
 import com.ti.serial.def.protocol.ByteFlowProtocol;
-import com.ti.serial.common.SerialService;
+import com.ti.serial.def.SerialService;
 
 import java.nio.ByteBuffer;
 
