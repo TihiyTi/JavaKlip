@@ -19,6 +19,8 @@ java {
 }
 
 dependencies {
+    implementation("commons-io:commons-io:2.15.1")
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
     testImplementation("commons-io:commons-io:2.15.1")

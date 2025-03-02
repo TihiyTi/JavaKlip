@@ -43,7 +43,7 @@ dependencies{
     implementation("org.slf4j:slf4j-api:2.0.11")  // SLF4J API
     implementation("ch.qos.logback:logback-classic:1.4.14")  // Logback (реализация SLF4J)
 
-
+    implementation("commons-io:commons-io:2.15.1")
 
    // implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 }

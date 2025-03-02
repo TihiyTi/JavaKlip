@@ -11,6 +11,7 @@ module com.ti.desktop{
 
     requires java.sql;
     requires org.slf4j;
+    requires org.apache.commons.io;
 //    requires jakarta.xml.bind;
 
 //    requires org.scream3r.jssc;
