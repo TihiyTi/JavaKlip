@@ -24,7 +24,7 @@ java {
 
 application {
   mainModule.set("com.ti.desktop")
-  mainClass.set("com.ti.desktop.FxFourSignal")
+  mainClass.set("com.ti.desktop.Remg")
 }
 
 dependencies{
@@ -56,15 +56,29 @@ javafx {
 }
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "com.ti.desktop.FxFourSignal"
+        attributes["Main-Class"] = "com.ti.desktop.Remg"
     }
 }
 
 jlink {
-    options.addAll("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
-    imageName.set("fx-four-signal")
+    options.addAll("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages", "--bind-services")
+    imageName.set("remg")
     launcher {
-        name = "fx-four-signal"
+        name = "remg"
+        jvmArgs.add("-Dlogback.configurationFile=../conf/logback.xml")
     }
     addExtraDependencies("javafx")
+    addExtraDependencies("slf4j")
+    addExtraDependencies("logback")
+
+}
+
+tasks.register<Copy>("copyPropertiesToJlink") {
+    from("$projectDir/Remg.properties")  // <-- путь к твоему файлу в проекте (можно src/main/config если хочешь)
+    into("$buildDir/remg/bin")     // <-- куда копируем в jlink-образ
+
+}
+
+tasks.jlink {
+    finalizedBy("copyPropertiesToJlink")
 }

@@ -18,7 +18,7 @@ class SawUnitTest {
     @Test
     public void SawUnitExample(){
         SawProtocolParser parser = new SawProtocolParser(8);
-        SawUnit<TestSawCommand> unit = new SawUnit<>(parser,parser, TestSawCommand::new);
+        SawUnit<TestSignalType, TestSawCommand> unit = new SawUnit<>(parser,parser, TestSawCommand::new);
         AdvanceSignalBox<TestSignalType> box = new AdvanceSignalBox<>(TestSignalType.class);
         unit.setBox(box);
 

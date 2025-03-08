@@ -7,6 +7,9 @@ import com.ti.serial.command.AbstractSawCommand;
 import java.nio.ByteBuffer;
 
 public class RemgSignalCommand extends AbstractSawCommand<RemgSignalType> {
+
+    int[] dataArray;
+
     protected int emg1 = 0;
     protected int emg2 = 0;
     protected int emg3 = 0;
@@ -74,6 +77,11 @@ public class RemgSignalCommand extends AbstractSawCommand<RemgSignalType> {
         eit11 =  fromByteBufferLittleEndian(buffer, 89);
         eit12 =  fromByteBufferLittleEndian(buffer, 93);
 
+        dataArray = new int[]{
+                emg1, emg2, emg3, emg4, emg5, emg6, emg7, emg8, emg9, emg10, emg11, emg12,
+                eit1, eit2, eit3, eit4, emg5, eit6, eit7, eit8, eit9, eit10, eit11, eit12
+        };
+
         buffer.rewind();
 //        hex = HexFormat.of().formatHex(buffer.array());
 //        count++;
@@ -124,6 +132,10 @@ public class RemgSignalCommand extends AbstractSawCommand<RemgSignalType> {
         }else{
             return 0;
         }
+    }
+
+    public int[] getDataArray(){
+        return dataArray;
     }
 
     @Override

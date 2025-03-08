@@ -1,5 +1,6 @@
 package com.ti.remg;
 
+import com.ti.signals.SignalConsumer;
 import com.ti.viewcore.AbstractViewSignalConsumer;
 import com.ti.viewcore.RealTimeMultiChartConsumer;
 import javafx.fxml.FXML;
@@ -26,11 +27,15 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
 
     List<RealTimeMultiChartConsumer> realTimeMultiChartConsumers;
 
+    private RemgSaveController saveController;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("RemgViewController initialize");
         addChartsToBox();
+        setupHotkeys();
+        System.out.println("RemgViewController initialize complete");
     }
 
     public void addChartsToBox(){
@@ -72,5 +77,29 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
 
     public RemgControlController getRemgControlController() {
         return remgControlPanelController;
+    }
+
+    private void setupHotkeys() {
+        remgBorder.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getAccelerators().put(
+                        new javafx.scene.input.KeyCodeCombination(
+                                javafx.scene.input.KeyCode.S,
+                                javafx.scene.input.KeyCombination.CONTROL_DOWN
+                        ),
+                        this::handleSave
+                );
+            }
+        });
+    }
+
+    private void handleSave() {
+        System.out.println("Ctrl+S pressed — Save action triggered");
+        saveController.toogleSaving();
+        // Здесь можно вызвать ваш реальный метод сохранения
+    }
+
+    public void setSaveController(RemgSaveController saveController) {
+        this.saveController = saveController;
     }
 }

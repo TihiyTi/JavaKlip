@@ -10,7 +10,7 @@
 
     <!-- Логирование в файл -->
     <appender name="toFile" class="ch.qos.logback.core.FileAppender">
-        <file>log/mylogfile.log</file>
+        <file>log/mylogfile2.log</file>
         <append>false</append>
         <encoder>
             <pattern>%level %logger{36}: %msg%n</pattern>

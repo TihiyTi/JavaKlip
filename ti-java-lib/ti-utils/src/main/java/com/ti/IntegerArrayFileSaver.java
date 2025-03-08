@@ -2,28 +2,29 @@ package com.ti;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class IntegerListFileSaver {
+public class IntegerArrayFileSaver {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
-    private final BlockingQueue<List<Integer>> queue;
+    private final BlockingQueue<int []> queue;
     private final AtomicBoolean running = new AtomicBoolean(false);
     private ExecutorService executor;
     private Writer writer;
     private final String baseFileName;
 
-    public IntegerListFileSaver(BlockingQueue<List<Integer>> queue, String baseFileName) {
+    public IntegerArrayFileSaver(BlockingQueue<int[]> queue, String baseFileName) {
         this.queue = queue;
         this.baseFileName = (baseFileName == null || baseFileName.isBlank()) ? "output" : baseFileName;
     }
@@ -63,9 +64,9 @@ public class IntegerListFileSaver {
     private void processQueue() {
         try {
             while (running.get() || !queue.isEmpty()) {
-                List<Integer> list = queue.poll(500, TimeUnit.MILLISECONDS);
-                if (list != null) {
-                    saveList(list);
+                int[] array = queue.poll(500, TimeUnit.MILLISECONDS);
+                if (array != null) {
+                    saveList(array);
                 }
             }
         } catch (IOException | InterruptedException e) {
@@ -80,8 +81,8 @@ public class IntegerListFileSaver {
         }
     }
 
-    private void saveList(List<Integer> list) throws IOException {
-        String line = String.join(",", list.stream().map(String::valueOf).toArray(String[]::new));
+    private void saveList(int [] array) throws IOException {
+        String line = String.join(",", Arrays.stream(array).mapToObj(String::valueOf).toArray(String[]::new));
         writer.write(line + System.lineSeparator());
     }
 

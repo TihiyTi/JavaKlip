@@ -17,4 +17,8 @@ public class RemgSignalManager  extends AbstractSignalManager<RemgSignalType> {
         Map<RemgSignalType, SignalConsumer> map = viewSignalConsumer.getMapOfSignalConsumer();
         map.forEach((key, value) -> box.addTypedConsumer(value, key));
     }
+
+    public void linkBoxToSave( ){
+
+    }
 }
