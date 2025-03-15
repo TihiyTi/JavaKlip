@@ -4,9 +4,6 @@ import com.ti.PropertiesService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 class PropertiesServiceTest {
 
     @Test

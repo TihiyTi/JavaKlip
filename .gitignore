@@ -44,3 +44,5 @@ ti-java-lib/gradlew
 ti-java-lib/gradlew.bat
 
 ti-java-lib/ti-utils/build/
+
+log/
