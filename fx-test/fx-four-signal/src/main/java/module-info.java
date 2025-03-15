@@ -22,6 +22,7 @@ module com.ti.desktop{
 
 
     opens com.ti.desktop to  javafx.graphics, javafx.fxml, javafx.controls;
+    opens com.ti.examples to  javafx.graphics, javafx.fxml, javafx.controls;
     opens com.ti.dspview to  javafx.graphics, javafx.fxml, javafx.controls;
     opens com.ti.viewcore to javafx.controls, javafx.fxml, javafx.graphics;
     opens com.ti.remg to javafx.graphics, javafx.fxml, javafx.controls;

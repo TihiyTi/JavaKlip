@@ -16,6 +16,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
 <BorderPane fx:id="border" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ti.remg.RemgControlController">
   <center>
@@ -27,7 +28,7 @@
     </VBox>
   </center>
    <top>
-       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+       <VBox prefHeight="250.0" prefWidth="100.0" BorderPane.alignment="CENTER">
            <Button fx:id="ping" text="Ping registrators" onAction="#handlePing"/>
            <HBox alignment="CENTER" spacing="5">
                <Label text="Установить в канал"/>
@@ -71,49 +72,11 @@
 
            </HBox>
 
-<!--           <Label text="Верхняя область"/>-->
-<!--           <ComboBox fx:id="chooseChannel" prefWidth="150.0" promptText="Выбери канал">-->
-<!--               <items>-->
-<!--                   <FXCollections fx:factory="observableArrayList">-->
-<!--                       <String fx:value="Канал 1"/>-->
-<!--                       <String fx:value="Канал 2"/>-->
-<!--                       <String fx:value="Канал 3"/>-->
-<!--                       <String fx:value="Канал 4"/>-->
-<!--                       <String fx:value="Канал 5"/>-->
-<!--                       <String fx:value="Канал 6"/>-->
-<!--                       <String fx:value="Канал 7"/>-->
-<!--                       <String fx:value="Канал 8"/>-->
-<!--                       <String fx:value="Канал 9"/>-->
-<!--                       <String fx:value="Канал 10"/>-->
-<!--                       <String fx:value="Канал 11"/>-->
-<!--                       <String fx:value="Канал 12"/>-->
-<!--                   </FXCollections>-->
-<!--               </items>-->
-<!--           </ComboBox>-->
-<!--           <HBox alignment="CENTER" spacing="5">-->
-<!--               <ToggleButton text="Кнопка 1"/>-->
-<!--               <ToggleButton text="Кнопка 2"/>-->
-<!--               <ToggleButton text="Кнопка 3"/>-->
-<!--           </HBox>-->
-<!--           <ChoiceBox fx:id="choiceBox" prefWidth="150.0">-->
-<!--               <items>-->
-<!--                   <FXCollections fx:factory="observableArrayList">-->
-<!--                       <String fx:value="Опция 1"/>-->
-<!--                       <String fx:value="Опция 2"/>-->
-<!--                       <String fx:value="Опция 3"/>-->
-<!--                   </FXCollections>-->
-<!--               </items>-->
-<!--           </ChoiceBox>-->
-           <ListView fx:id="listView" prefWidth="150.0" prefHeight="120.0">
-               <items>
-                   <FXCollections fx:factory="observableArrayList">
-                       <String fx:value="Элемент 1"/>
-                       <String fx:value="Элемент 2"/>
-                       <String fx:value="Элемент 3"/>
-                       <String fx:value="Элемент 4"/>
-                   </FXCollections>
-               </items>
-           </ListView>
+           <StackPane style="-fx-border-color: orange; -fx-border-width: 2;"
+                      prefWidth="100.0" prefHeight="200">
+               <fx:include fx:id="commandChoosePanel" source="../examples/choose_filter.fxml"/>
+           </StackPane>
+
        </VBox>
    </top>
 

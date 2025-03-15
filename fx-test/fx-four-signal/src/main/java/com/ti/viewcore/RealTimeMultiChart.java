@@ -25,6 +25,8 @@ public class RealTimeMultiChart {
     private NumberAxis yAxis;
     private int xSeriesData = 0;
 
+    private String baseChartName = "Серия";
+
     public RealTimeMultiChart(int seriesCount) {
         this(seriesCount, Integer.parseInt(PropertiesService.getGlobalProperty("pointOnView")),
                 Boolean.parseBoolean(PropertiesService.getGlobalProperty("skip10")));
@@ -34,6 +36,16 @@ public class RealTimeMultiChart {
         this.seriesCount = seriesCount;
         this.maxDataPoint = maxDataPoint;
         this.skip10 = skip10;
+        init();
+//        System.setProperty("javafx.pulseLogger", "true");
+
+    }
+
+    public RealTimeMultiChart(int seriesCount, int maxDataPoint, boolean skip10, String title) {
+        this.seriesCount = seriesCount;
+        this.maxDataPoint = maxDataPoint;
+        this.skip10 = skip10;
+        this.baseChartName = title;
         init();
 //        System.setProperty("javafx.pulseLogger", "true");
 
@@ -55,7 +67,7 @@ public class RealTimeMultiChart {
 
         for (int i = 0; i < seriesCount; i++) {
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Серия " + i);
+            series.setName(baseChartName + i);
             seriesMap.put( ""+i, series);
             dataQueues.put(""+i, new ConcurrentLinkedQueue<>());
             chart.getData().add(series);

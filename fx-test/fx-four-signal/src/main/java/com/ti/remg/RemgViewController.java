@@ -39,8 +39,8 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
     }
 
     public void addChartsToBox(){
-        realTimeMultiChartConsumers = Stream.generate(()-> new RealTimeMultiChartConsumer(12, 2000, false))
-                .limit(3)
+        realTimeMultiChartConsumers = Stream.of("ECG", "EIT", "MTG")
+                .map(name-> new RealTimeMultiChartConsumer(12, 2000, false, name))
                 .toList();
         realTimeMultiChartConsumers.forEach(consumer -> chartHBox.getChildren().add(consumer.getChart()));
 
@@ -57,18 +57,33 @@ public class RemgViewController extends AbstractViewSignalConsumer<RemgSignalTyp
         addTypedConsumerToMap(RemgSignalType.EMG11, realTimeMultiChartConsumers.get(0).listeners.get(10));
         addTypedConsumerToMap(RemgSignalType.EMG12, realTimeMultiChartConsumers.get(0).listeners.get(11));
 
-//        addTypedConsumerToMap(RemgSignalType.EIT1, realTimeMultiChartConsumers.get(0).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT2, realTimeMultiChartConsumers.get(1).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT3, realTimeMultiChartConsumers.get(2).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT4, realTimeMultiChartConsumers.get(3).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT5, realTimeMultiChartConsumers.get(4).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT6, realTimeMultiChartConsumers.get(5).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT7, realTimeMultiChartConsumers.get(6).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT8, realTimeMultiChartConsumers.get(7).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT9, realTimeMultiChartConsumers.get(8).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT10, realTimeMultiChartConsumers.get(9).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT11, realTimeMultiChartConsumers.get(10).listeners.get(1));
-//        addTypedConsumerToMap(RemgSignalType.EIT12, realTimeMultiChartConsumers.get(11).listeners.get(1));
+        addTypedConsumerToMap(RemgSignalType.EIT1, realTimeMultiChartConsumers.get(1).listeners.get(0));
+        addTypedConsumerToMap(RemgSignalType.EIT2, realTimeMultiChartConsumers.get(1).listeners.get(1));
+        addTypedConsumerToMap(RemgSignalType.EIT3, realTimeMultiChartConsumers.get(1).listeners.get(2));
+        addTypedConsumerToMap(RemgSignalType.EIT4, realTimeMultiChartConsumers.get(1).listeners.get(3));
+        addTypedConsumerToMap(RemgSignalType.EIT5, realTimeMultiChartConsumers.get(1).listeners.get(4));
+        addTypedConsumerToMap(RemgSignalType.EIT6, realTimeMultiChartConsumers.get(1).listeners.get(5));
+        addTypedConsumerToMap(RemgSignalType.EIT7, realTimeMultiChartConsumers.get(1).listeners.get(6));
+        addTypedConsumerToMap(RemgSignalType.EIT8, realTimeMultiChartConsumers.get(1).listeners.get(7));
+        addTypedConsumerToMap(RemgSignalType.EIT9, realTimeMultiChartConsumers.get(1).listeners.get(8));
+        addTypedConsumerToMap(RemgSignalType.EIT10, realTimeMultiChartConsumers.get(1).listeners.get(9));
+        addTypedConsumerToMap(RemgSignalType.EIT11, realTimeMultiChartConsumers.get(1).listeners.get(10));
+        addTypedConsumerToMap(RemgSignalType.EIT12, realTimeMultiChartConsumers.get(1).listeners.get(11));
+
+
+        addTypedConsumerToMap(RemgSignalType.MTG1, realTimeMultiChartConsumers.get(2).listeners.get(0));
+        addTypedConsumerToMap(RemgSignalType.MTG2, realTimeMultiChartConsumers.get(2).listeners.get(1));
+        addTypedConsumerToMap(RemgSignalType.MTG3, realTimeMultiChartConsumers.get(2).listeners.get(2));
+        addTypedConsumerToMap(RemgSignalType.MTG4, realTimeMultiChartConsumers.get(2).listeners.get(3));
+        addTypedConsumerToMap(RemgSignalType.MTG5, realTimeMultiChartConsumers.get(2).listeners.get(4));
+        addTypedConsumerToMap(RemgSignalType.MTG6, realTimeMultiChartConsumers.get(2).listeners.get(5));
+        addTypedConsumerToMap(RemgSignalType.MTG7, realTimeMultiChartConsumers.get(2).listeners.get(6));
+        addTypedConsumerToMap(RemgSignalType.MTG8, realTimeMultiChartConsumers.get(2).listeners.get(7));
+        addTypedConsumerToMap(RemgSignalType.MTG9, realTimeMultiChartConsumers.get(2).listeners.get(8));
+        addTypedConsumerToMap(RemgSignalType.MTG10, realTimeMultiChartConsumers.get(2).listeners.get(9));
+        addTypedConsumerToMap(RemgSignalType.MTG11, realTimeMultiChartConsumers.get(2).listeners.get(10));
+        addTypedConsumerToMap(RemgSignalType.MTG12, realTimeMultiChartConsumers.get(2).listeners.get(11));
+
 
         //        addTypedConsumerToMap(RemgSignalType.EMG1, realTimeMultiChartConsumers.get(0).listeners.get(0));
 //        addTypedConsumerToMap(RemgSignalType.EMG1, realTimeMultiChartConsumers.get(0).listeners.get(0));

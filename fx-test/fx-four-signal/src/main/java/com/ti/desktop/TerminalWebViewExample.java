@@ -19,7 +19,7 @@ public class TerminalWebViewExample extends Application {
             System.out.println("Получена команда: " + command);
 
             // Эмулируем задержку ответа
-            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.2));
             delay.setOnFinished(e -> Platform.runLater(() -> {
                 terminal.sendResponse("Ответ устройства: " + command.toUpperCase());
             }));
@@ -27,7 +27,7 @@ public class TerminalWebViewExample extends Application {
         });
 
         VBox root = new VBox(terminal);
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 600, 200));
         primaryStage.setTitle("WebView Terminal");
         primaryStage.show();
     }

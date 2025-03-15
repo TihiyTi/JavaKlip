@@ -1,43 +1,60 @@
 package com.ti.remg;
 
+import com.ti.PropertiesService;
 import com.ti.dspview.TerminalWebView;
+import com.ti.examples.ChooseFilterController;
+import com.ti.examples.PushCommandInterface;
 import com.ti.serial.def.controller.ByteController;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class RemgControlController implements Initializable {
+public class RemgControlController implements Initializable, PushCommandInterface {
     @FXML
     public BorderPane border;
 
     @FXML
     public TerminalWebView terminal;
     public ComboBox chooseChannel;
-    @FXML
-    public ListView<String> listView;
+//    @FXML
+//    public ListView<String> listView;
     public Button ping;
 
+    public GridPane commandChoosePanel;
+    public ChooseFilterController commandChoosePanelController;
+
     private ByteController byteController;
+
+    Map<String, String> map;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        String prop = PropertiesService.getGlobalProperty("commandFileName");
+        PropertiesService service = new PropertiesService();
+        service.setName(prop);
+        map = service.getAllProperties();
+        List<String> keys = map.entrySet().stream().map(e->e.getKey()+ " | " +e.getValue()).toList();
+//        List<String> keys =  map.keySet().stream().toList();
+        System.out.println(map);
+        commandChoosePanel.prefHeight(150);
+        commandChoosePanelController.setPrintVariants(keys);
+        commandChoosePanelController.initPane(this);
 
         // Добавляем слушатель к списку выбранных элементов
 //        listView.addEventHandler((obs, oldSelection, newSelection) -> {
@@ -90,5 +107,11 @@ public class RemgControlController implements Initializable {
         pause.setOnFinished(event -> pingAllChannel(ch+1));
         pause.play();
         terminal.typeAndSendEmulate("d "+ ch + " ver");
+    }
+
+    @Override
+    public void pushCommand(String command) {
+        System.out.println( "Add command: " + map.get(command.split("\\|")[0].trim()));
+        terminal.typeAndSendEmulate(map.get(command.split("\\|")[0].trim()));
     }
 }

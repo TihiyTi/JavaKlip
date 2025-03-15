@@ -76,9 +76,20 @@ jlink {
 tasks.register<Copy>("copyPropertiesToJlink") {
     from("$projectDir/Remg.properties")  // <-- путь к твоему файлу в проекте (можно src/main/config если хочешь)
     into("$buildDir/remg/bin")     // <-- куда копируем в jlink-образ
-
+}
+tasks.register<Copy>("copyCommandsToJlink") {
+    from("$projectDir/Command.properties")  // <-- путь к твоему файлу в проекте (можно src/main/config если хочешь)
+    into("$buildDir/remg/bin")     // <-- куда копируем в jlink-образ
 }
 
 tasks.jlink {
     finalizedBy("copyPropertiesToJlink")
+}
+tasks.jlink {
+    finalizedBy("copyCommandsToJlink")
+}
+// Добавляем зависимость, чтобы `jlinkZip` ждал `copyPropertiesToJlink`
+tasks.jlinkZip {
+    dependsOn("copyPropertiesToJlink")
+    dependsOn("copyCommandsToJlink")
 }
