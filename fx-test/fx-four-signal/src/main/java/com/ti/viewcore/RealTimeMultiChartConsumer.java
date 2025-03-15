@@ -14,9 +14,17 @@ public class RealTimeMultiChartConsumer extends RealTimeMultiChart {
         super(seriesCount);
     }
 
-    public RealTimeMultiChartConsumer(int seriesCount, int maxDataPoint, boolean skip10) {
-        super(seriesCount, maxDataPoint, skip10);
+    public RealTimeMultiChartConsumer(int seriesCount, int maxDataPoint, boolean skip10, String baseSignlName) {
+        super(seriesCount, maxDataPoint, skip10, baseSignlName);
 
+        for (int i = 0; i < seriesCount; i++) {
+            var name = "" + i;
+            listeners.add(element -> addElement(element.doubleValue(), name));
+        }
+    }
+
+    public RealTimeMultiChartConsumer(int seriesCount, int maxDataPoint, boolean skip10){
+        super(seriesCount, maxDataPoint, skip10);
         for (int i = 0; i < seriesCount; i++) {
             var name = ""+i;
             listeners.add(element -> addElement(element.doubleValue(), name));

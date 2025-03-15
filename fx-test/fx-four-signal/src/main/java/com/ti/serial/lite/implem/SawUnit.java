@@ -13,14 +13,14 @@ import com.ti.serial.common.protocol.Protocol;
 import java.nio.ByteBuffer;
 import java.util.function.Supplier;
 
-public class SawUnit<COMMAND_TYPE extends AbstractCommand>
-        extends AbstractProtocolLite<AbstractCommand, AbstractCommand>
-        implements SerialControllable<AbstractCommand, AbstractCommand> {
-    private Supplier<COMMAND_TYPE> supplier;
+public class SawUnit<COMMAND_TYPE, COMMAND_IMPL extends AbstractCommand<COMMAND_TYPE>>
+        extends AbstractProtocolLite<AbstractCommand<COMMAND_TYPE>, AbstractCommand<COMMAND_TYPE>>
+        implements SerialControllable<AbstractCommand<COMMAND_TYPE>, AbstractCommand<COMMAND_TYPE>> {
+    protected Supplier<COMMAND_IMPL> supplier;
 
-    private AdvanceSignalBox box;
+    protected AdvanceSignalBox box;
 
-    public SawUnit(ProtocolCheckable protocolChecker, CommandSplittableLite commandSplitter, Supplier<COMMAND_TYPE> supplier) {
+    public SawUnit(ProtocolCheckable protocolChecker, CommandSplittableLite commandSplitter, Supplier<COMMAND_IMPL> supplier) {
         super(protocolChecker, commandSplitter);
         this.supplier = supplier;
         controller = this;
@@ -37,7 +37,7 @@ public class SawUnit<COMMAND_TYPE extends AbstractCommand>
     }
 
     @Override
-    public void serviceRequest(AbstractCommand abstractCommand) {
+    public void serviceRequest(AbstractCommand<COMMAND_TYPE> abstractCommand) {
         box.listOfType.forEach(x-> {
             int data = ((AbstractSawCommand)abstractCommand).getData((Enum) x);
             // TODO: 18.03.2018 вынести фильтрацию в AdvanceSignalBox, добавить еще один list помимо listOfType
@@ -53,7 +53,7 @@ public class SawUnit<COMMAND_TYPE extends AbstractCommand>
     }
 
     @Override
-    public void addProtocol(Protocol<AbstractCommand, AbstractCommand> protocol) {
+    public void addProtocol(Protocol<AbstractCommand<COMMAND_TYPE>, AbstractCommand<COMMAND_TYPE>> protocol) {
         System.out.println("Dont apply to UNIT, it's already Controller and Protocol");
     }
 

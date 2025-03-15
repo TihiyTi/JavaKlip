@@ -1,7 +1,11 @@
 package com.ti;//import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class PropertiesService {
@@ -71,6 +75,22 @@ public class PropertiesService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Map<String, String> getAllProperties(){
+        Map<String, String> propertiesMap = new HashMap<>();
+        Properties mainProperties = new Properties();
+
+        String path = "./" + localPropertyFileName + ".properties";
+        try (FileInputStream file = new FileInputStream(path)) {
+            mainProperties.load(file);
+            for (String key : mainProperties.stringPropertyNames()) {
+                propertiesMap.put(key, mainProperties.getProperty(key));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return propertiesMap;
     }
 
     public void saveProperty(String key, String value){

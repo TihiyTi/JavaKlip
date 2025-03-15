@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="pane"  style="-fx-background-color:rgba(2,156,130,0.25)" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ti.examples.ChooseFilterController">
+<!--    <padding>-->
+<!--        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>-->
+<!--    </padding>-->
+<!--    <Label fx:id="questionText" wrapText="true" style="-fx-font: NORMAL 15 Regular;"-->
+<!--           GridPane.columnIndex="0" GridPane.rowIndex="0">-->
+<!--    </Label>-->
+    <TextField fx:id="filterField" promptText="Начните вводить для фильтрации списка" style="-fx-font: NORMAL 15 Regular;"
+           GridPane.columnIndex="0" GridPane.rowIndex="1">
+    </TextField>
+
+    <ListView fx:id="listView" style="-fx-border-color:green"
+              onMouseClicked="#clickOnList" onKeyPressed="#listKey"
+              GridPane.columnIndex="0" GridPane.rowIndex="2">
+
+    </ListView>
+</GridPane>

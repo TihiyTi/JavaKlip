@@ -110,6 +110,25 @@ public class TerminalWebView extends Region {
         });
     }
 
+//    private void updateWebView(String from) {
+//        System.out.println("From " + from);
+//        Platform.runLater(() -> {
+//            String displayedText = terminalContent.toString();
+//            if (!currentCommand.isEmpty()) {
+//                displayedText += currentCommand;
+//            }
+//
+//            String highlightedText = displayedText
+//                    .replaceAll("\\b(ver|reset|config|save|d)\\b", "<span style='color: blue; font-weight: bold;'>$1</span>");
+//
+//            String htmlContent = "<html><body style='font-family: monospace; white-space: pre-wrap;'>"
+//                    + highlightedText +
+//                    "<span style='background: #ccc;'>&#8203;</span></body></html>";
+//
+//            webView.getEngine().loadContent(htmlContent);
+//        });
+//    }
+
     private void updateWebView(String from) {
         System.out.println("From " + from);
         Platform.runLater(() -> {
@@ -121,11 +140,16 @@ public class TerminalWebView extends Region {
             String highlightedText = displayedText
                     .replaceAll("\\b(ver|reset|config|save|d)\\b", "<span style='color: blue; font-weight: bold;'>$1</span>");
 
-            String htmlContent = "<html><body style='font-family: monospace; white-space: pre-wrap;'>"
+            // ✅ Автоматическая прокрутка вниз
+            String script = "document.body.innerHTML = `" + highlightedText + "`; window.scrollTo(0, document.body.scrollHeight);";
+
+            String htmlContent = "<html><body style='font-family: monospace; white-space: pre-wrap;' onload=\"" + script + "\">"
                     + highlightedText +
                     "<span style='background: #ccc;'>&#8203;</span></body></html>";
 
             webView.getEngine().loadContent(htmlContent);
         });
     }
+
+
 }

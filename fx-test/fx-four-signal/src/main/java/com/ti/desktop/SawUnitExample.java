@@ -24,7 +24,7 @@ class SawUnitExample {
 
 
         SawProtocolParser parser = new SawProtocolParser(151);
-        SawUnit<SingleSignalCommand> unit = new SawUnit<>(parser,parser, SingleSignalCommand::new);
+        SawUnit<SingleSignalType, SingleSignalCommand> unit = new SawUnit<>(parser,parser, SingleSignalCommand::new);
         AdvanceSignalBox<SingleSignalType> box = new AdvanceSignalBox<>(SingleSignalType.class);
         unit.setBox(box);
 
