@@ -16,10 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RemgControlController implements Initializable, PushCommandInterface {
@@ -110,8 +107,26 @@ public class RemgControlController implements Initializable, PushCommandInterfac
     }
 
     @Override
-    public void pushCommand(String command) {
-        System.out.println( "Add command: " + map.get(command.split("\\|")[0].trim()));
-        terminal.typeAndSendEmulate(map.get(command.split("\\|")[0].trim()));
+    public void pushCommand(String nameAndCommand) {
+        String command = map.get(nameAndCommand.split("\\|")[0].trim());
+        if(command.contains("|")){
+            List<String> commandList = Arrays.stream(command.split("\\|")).toList();
+            System.out.println( "Add command list: " + commandList);
+            sendAllCommand(0, commandList);
+        }else {
+            System.out.println( "Add command: " + command);
+            terminal.typeAndSendEmulate(command);
+        }
+    }
+
+
+    private void sendAllCommand(int commandIndex, List<String> commands) {
+        if (commandIndex == commands.size()) {
+            return;
+        }
+        PauseTransition pause = new PauseTransition(Duration.millis(600));
+        pause.setOnFinished(event -> sendAllCommand(commandIndex+1, commands));
+        pause.play();
+        terminal.typeAndSendEmulate(commands.get(commandIndex));
     }
 }

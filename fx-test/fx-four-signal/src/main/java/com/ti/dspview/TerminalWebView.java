@@ -70,7 +70,7 @@ public class TerminalWebView extends Region {
 
     private void processCommand() {
         String command = currentCommand;
-        System.out.println("To send:"+ currentCommand + " -> " + currentCommand.replace("\n", "\\n").replace("\r", "\\r"));
+//        System.out.println("To send:"+ currentCommand + " -> " + currentCommand.replace("\n", "\\n").replace("\r", "\\r"));
 //        terminalContent.append(currentCommand).append("\n");
         currentCommand = "";
 
@@ -83,7 +83,7 @@ public class TerminalWebView extends Region {
 
     public void sendResponse(String response) {
         Platform.runLater(() -> {
-            System.out.println("Response: " + response);
+//            System.out.println("Response: " + response);
             terminalContent.append(response);//.append("\n");
             addPrompt();
         });
@@ -130,7 +130,7 @@ public class TerminalWebView extends Region {
 //    }
 
     private void updateWebView(String from) {
-        System.out.println("From " + from);
+//        System.out.println("From " + from);
         Platform.runLater(() -> {
             String displayedText = terminalContent.toString();
             if (!currentCommand.isEmpty()) {
